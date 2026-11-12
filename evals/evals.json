@@ -1,0 +1,23 @@
+{
+  "skill_name": "rea-build-guard",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我刚跑完 npm run build，发版前帮我检查一下 dist/ 目录有没有把 API key、.map 源码映射或者本机 /Users 路径打进去，另外 gzip 总大小不能超过 500 KB。",
+      "expected_output": "Runs guard.py against dist/ with --budget-total-kb 500, summarizes PASS/WARN/FAIL verdict, reports any SEC-001/SEC-003/BND-001 findings with redacted matches, and provides concrete Vite/Next remediation snippets.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Audit build/AgentBar.app before I cut a GitHub Release—make sure it doesn't link any /opt/homebrew dylibs, the code signature is intact, and LC_BUILD_VERSION matches Info.plist.",
+      "expected_output": "Runs guard.py against build/AgentBar.app, inspects MAC-001..MAC-005 plus REA inspect-macho metadata, confirms dylib portability and codesign status, and summarizes the generated report.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Compare our new production bundle in dist/ against the previous audit in reports/build-guard-prev and tell me if vibe-coding added any new external telemetry domains or bloated the main chunk.",
+      "expected_output": "Runs guard.py dist/ --compare reports/build-guard-prev, highlights raw/gzip delta, pairs content-hashed chunks, and lists newly introduced external origins.",
+      "files": []
+    }
+  ]
+}
